@@ -1,0 +1,162 @@
+<canvas>
+
+	<resource name="handler_rsrc" 
+	          src="1211776979.png"/>
+
+	<resource name="rotator_rsrc" 
+	          src="green_button.png"/>
+	<resource name="Background_rsrc" 
+	          src="background.png"/>
+ <class name="box" resource="Background_rsrc"
+                clickable="true" showhandcursor="false"
+                clickregion="background.png">
+
+        <attribute name="xpos"/>
+        <attribute name="ypos"/>
+
+        <attribute name="rotatedel" 
+                   value="$once{new lz.Delegate (this, 'doRotate')}"/>
+
+
+        <attribute name="dragxmin" value="null"/>
+        <attribute name="dragymin" value="null"/>
+        <attribute name="dragxmax" value="null"/>
+        <attribute name="dragymax" value="null"/>
+		<attribute name="rotation" value="null"/>
+
+        <dragstate name="dragger"
+                   drag_min_x="${this.dragxmin}"
+                   drag_min_y="${this.dragymin}"
+                   drag_max_x="${this.dragxmax}"
+                   drag_max_y="${this.dragymax}">
+
+			
+      <attribute name="rrotation" value="${this.rotation * (Math.PI/180)}"/>
+			<attribute name="actualX" value="$once{this.xoffset - this.getMouse( 'x' )}" />
+			<attribute name="actualY" value="$once{this.yoffset - this.getMouse( 'y' )}" />
+
+			
+            <attribute name="__dragstate_ydoffset" 
+                       value="${this.actualX * Math.sin (this.rrotation) +
+                                     this.actualY * Math.cos (this.rrotation)}"/>
+            <attribute name="__dragstate_xdoffset" 
+                       value="${this.actualX * Math.cos (this.rrotation) -
+                                     this.actualY * Math.sin (this.rrotation)}"/>
+                                     
+                                     		 
+		 	<attribute name="x" value="(this.drag_axis == 'both' || this.drag_axis == 'x') ? __dragstate_getnewpos('x', this.immediateparent.getMouse( 'x' ) + this.__dragstate_xdoffset): this.x" when="always"/> 
+ 
+ 			<attribute name="y" value="(this.drag_axis == 'both' || this.drag_axis == 'y') ? __dragstate_getnewpos('y', this.immediateparent.getMouse( 'y' ) + this.__dragstate_ydoffset): this.y" when="always"/> 
+ 
+ 
+			<handler name="onapply">
+                var rotation = classroot.rotation * (Math.PI/180);
+
+                var grabber = classroot.grabber;
+
+                var gxstart = (grabber.x) * Math.cos (rotation) -
+                                 (grabber.y + grabber.height/2) * Math.sin (rotation);
+                var gystart = (grabber.x) * Math.sin (rotation) +
+                                 (grabber.y + grabber.height/2) * Math.cos (rotation);
+
+                var gxend   = (grabber.x + grabber.width) * Math.cos (rotation) -
+                                 (grabber.y + grabber.height/2) * Math.sin (rotation);
+                var gyend   = (grabber.x + grabber.width) * Math.sin (rotation) +
+                                 (grabber.y + grabber.height/2) * Math.cos (rotation);
+				Debug.write("gxstart:gystart",gxstart,gxend ,gystart,gyend);
+				
+                //set drag max and min
+                classroot.setAttribute ('dragxmin', - (Math.min (gxstart, gxend)));
+                classroot.setAttribute ('dragymin', - (Math.min (gystart, gyend)));
+
+                classroot.setAttribute ('dragxmax', 
+                                        classroot.parent.width - (Math.max (gxstart, gxend)));
+                classroot.setAttribute ('dragymax', 
+                                        classroot.parent.height - 6  - (Math.max (gystart, gyend)));
+				Debug.write("classroot.parent.width,classroot.parent.height", classroot.parent);
+				Debug.write("classroot.parent.width,classroot.parent.height", classroot.parent.width,classroot.parent.height);
+            </handler>
+
+        </dragstate>
+        
+        <handler name="oninit">
+			this.setAttribute('x', 100);
+			this.setAttribute('y', 100);
+            this.setAttribute ('xpos', this.width/2);
+            this.setAttribute ('ypos', this.height);
+        </handler>
+		<handler name="onmousedown">
+			this.bringToFront();
+		</handler>
+
+
+
+        <method name="startRotate">
+            this.rotatedel.register (lz.Idle, 'onidle');
+            
+            this.setAttribute ('xoffset', this.xpos);
+           this.setAttribute ('yoffset', this.ypos);
+            
+            var rad = this.rotation * (Math.PI/180);
+            
+            var dx = Math.cos (rad) * this.xpos - Math.sin (rad) * this.ypos;
+            var dy = Math.sin (rad) * this.xpos + Math.cos (rad) * this.ypos;
+            
+            this.setAttribute ('x', this.x + dx);
+            this.setAttribute ('y', this.y + dy);                
+        </method>
+
+        <method name="endRotate">
+            this.rotatedel.unregisterAll ();
+            
+            this.setAttribute ('xoffset', 0);
+            this.setAttribute ('yoffset', 0);
+            
+            var rad = this.rotation * (Math.PI/180);
+            
+            var dx = Math.cos (rad) * this.xpos - Math.sin (rad) * this.ypos;
+            var dy = Math.sin (rad) * this.xpos + Math.cos (rad) * this.ypos;
+            
+            this.setAttribute ('x', this.x - dx);
+            this.setAttribute ('y', this.y - dy);  
+        </method>
+
+        <method name="doRotate"><![CDATA[
+            var mx = parent.getMouse ('x') - this.x;
+            var my = parent.getMouse ('y') - this.y;
+            
+            if (this.xoffset > this.width/2) {
+                mx = -mx;
+                my = -my;
+            }
+
+            var mousedist = Math.sqrt (mx*mx + my*my);
+            var endang = Math.asin (my/mousedist) * (180/Math.PI);
+
+            if (mx < 0) endang = 180 - endang;
+
+            this.setAttribute ('rotation',endang);
+        ]]></method>
+
+        <view name="grabber" resource="handler_rsrc" y="97" align="center" >
+
+            <handler name="onmousedown">
+            	classroot.bringToFront();
+
+                classroot.dragger.apply ();
+            </handler>
+            <handler name="onmouseup">
+
+                classroot.dragger.remove ();
+
+            </handler>
+        </view>
+
+        <view resource="rotator_rsrc" y="150" x="${classroot.width - 45}"
+              onmousedown="classroot.bringToFront(); classroot.startRotate (); " 
+              onmouseup="classroot.endRotate()"/>
+    </class>
+	
+	<box/>
+
+</canvas>
