@@ -43,13 +43,7 @@
                        value="${this.actualX * Math.cos (this.rrotation) -
                                      this.actualY * Math.sin (this.rrotation)}"/>
                                      
-                                     		 
-		 	<attribute name="x" value="(this.drag_axis == 'both' || this.drag_axis == 'x') ? __dragstate_getnewpos('x', this.immediateparent.getMouse( 'x' ) + this.__dragstate_xdoffset): this.x" when="always"/> 
- 
- 			<attribute name="y" value="(this.drag_axis == 'both' || this.drag_axis == 'y') ? __dragstate_getnewpos('y', this.immediateparent.getMouse( 'y' ) + this.__dragstate_ydoffset): this.y" when="always"/> 
- 
- 
-			<handler name="onapply">
+             <handler name="onapply">
                 var rotation = classroot.rotation * (Math.PI/180);
 
                 var grabber = classroot.grabber;
