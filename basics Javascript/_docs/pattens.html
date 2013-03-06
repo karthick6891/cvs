@@ -1,0 +1,112 @@
+<!DOCTYPE>
+<html>
+<head>
+<meta name="description" content="pattern" />
+<meta name="keywords" content="HTML,CSS,XML,JavaScript" />
+<meta name="author" content="Santhana Rajagopalan" />
+<meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+<Title>Patterns</Title>
+
+</head>
+<body>
+<script type="text/javascript">
+ /***
+ *		All functions can be represented as variable i.e. literal notation
+ *		
+ *
+ *
+ *
+ *
+ *
+ ***/
+ 
+ function basicPattern(){
+	var o = {
+				valueOf: function(){				
+					return "sano";
+				}
+			};
+ 
+	return o;
+ }
+ 
+ var basicPattern = 5;
+ console.log(basicPattern);
+ /**************************************************************************/
+ 
+ /**************************************************************************/
+ 
+ /**************************************************************************/
+ 
+ /**************************************************************************/
+ 
+ /**************************************************************************/
+ 
+ /**************************************************************************/
+ 
+ /**************************************************************************/
+ 
+ /**************************************************************************/
+ 
+ /**************************************************************************/
+ 
+ /**************************************************************************/
+ 
+ /**************************************************************************/
+ 
+ 
+ /*********************Sample Tester utils**************************************************/
+ function test(){
+	var elem = document.getElementById('div1');
+	//without filter
+	var iterator = document.createNodeIterator(elem, NodeFilter.SHOW_ELEMENT,null,false);
+	var node = iterator.nextNode();
+	while (node!=null){
+	console.log(node.tagName);
+	node = iterator.nextNode();
+	}
+	
+	//with filter
+	var filter = function(node){
+	return node.tagName.toLowerCase() == "li" ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_SKIP;
+	};
+	//without filter
+	var newiterator = document.createNodeIterator(elem, NodeFilter.SHOW_ELEMENT,filter,false);
+	var newnode = newiterator.nextNode();
+	while (newnode!=null){
+	console.log("with filter: "+newnode.tagName);
+	newnode = newiterator.nextNode();
+	}
+	
+	var walker = document.createTreeWalker(elem, NodeFilter.SHOW_ELEMENT,filter,false);
+	console.log("walker parent", walker.parentNode());
+	var newwnode = walker.firstChild();
+	while (newwnode!=null){
+	console.log("with walker: "+newwnode.tagName);
+	newwnode = walker.nextSibling();
+	}
+ }
+ 
+ function testRange(){
+	var range1 = document.createRange(), range2 = document.createRange(), p1 = document.getElementById('p1');
+	var x= range1.selectNode(p1);
+	console.log(x);
+	var y = range1.selectNodeContents(p1);
+	console.log(y);
+ }
+</script>
+
+<div id="div1">
+<p id = "p1"> Hi this is santhana</p>
+<ul>
+	<li> List item 1</li>
+	<li> List item 2</li>
+	<li> List item 3</li>
+	
+</ul>
+</div>
+<input type="button" onclick="test()">Test Traversals</input>
+<input type="button" onclick="testRange()">Test Range</input>
+<div id="textarea" contenteditable="true"></div>
+</body>
+</html>

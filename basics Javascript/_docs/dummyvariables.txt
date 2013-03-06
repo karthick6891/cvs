@@ -1,0 +1,37 @@
+var x = {firstName: "Santhana", lastName: "Sethubalan", age:"26",address:{home: "Kolathur",office:"siruseri"} };
+
+var pattern1 = '/^(?:load|unload|abort|error|select|change|submit|reset|focus|blur|resize|scroll)$';
+var pattern2  =/^(?:click|dblclick|mouse(?:down|up|over|move|out))$/;
+
+case insensitive
+var pattern2  =/^(?:click|dblclick|mouse(?:down|up|over|move|out))$/i;
+
+pattern2.test('mousedown'); // true
+
+
+var pattern = /^(?:hawaian (?:beach|pizza|hotel))$/gim;
+
+pattern.test('hawaian hotel');
+
+
+pattern
+
+
+The pattern uses beginning and end of string anchors, so you would only match strings 
+if the pattern matches the entire string. Remove the ^ and $ and you should be okay.
+
+After removing
+
+var pattern3 = /(?:hawaian (?:beach|pizza|hotel))/gim; // or (?:hawaiian[ ](?:beach|pizza|hotel)) 
+var text = "hawaian hotel is near hawaian beach. In the hawaian hotel they sell hawaian pizza";
+pattern3.exec(text);
+pattern3.exec(text);
+pattern3.exec(text);
+
+(or)
+text.match(pattern3);
+
+var text = 'cat, bat, fat, sat';
+
+var result = text.replace(/(.at)/g, "word ($1)");
+console.log(result);

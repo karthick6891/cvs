@@ -1,0 +1,75 @@
+Chapter 1 
+	ECMA (ECMA5 Latest)
+	
+	Web browsers act like a host in which ECMA implementation exists.
+
+	DOM, api that maps the whole page as hierarchy of nodes.It provides methods and interfaces for working with the content of the page.
+
+	BOM, It provides methods and interfaces for accessing and manipulation of the browser window.
+	
+
+Chapter2
+	Script text/javascript(Interpreted) script tag escape <\/script>
+
+	External Javascript -Caching
+
+	Tag positioning in head and body(for late execution and faster rendering)
+
+	Defer scripts - Execute in the order in which they have specified. Scripts are executed once the entire page is parsed. It's not for inline scripts.
+
+	Async scripts - Indicates that the script should be downloaded immediately but should not prevent other actions on the page such as download of resources.Scripts won't be executed in the order in which they have specified. It's not for inline scripts
+	
+	XHTML <![CDATA ]>>
+
+	In XHTML documents you can omit the closing tag, <script type="text/javascript" src="example.js" />
+	
+	DOCTYPE  Decides rendering mode(quirks and standard in IE)
+
+	noscript
+
+Chapter3
+	Everything is CaseSensitive
+
+	Identifier first character must be a letter, an underscore or a dollar sign
+
+	Variable - loosely typed
+
+	Comments
+
+	Strict Mode: To enable strict mode for an entire script, include the following at the top: "use strict";
+	We can also specify strict mode for only a function using this syntax. function doSomething(){ "use strict"; ......; }
+
+	DataTypes: 
+		Primitives : Undefined, NULL, Boolean, Number and String
+		Complex:	 Objects
+
+	TypeOf: (typeof) not effefctive against references. Should be used only for Primitive types
+		example: var message = "something"; alert(typeof (message)); //string
+
+	Undefined: When a variable is declared withouit initializing a special, then it's assigned the value undefined
+
+	Null: Initialize varaible with null, if the variable is to hold a reference at later stage. null == undefined
+
+	Boolean: false - 0, true - anything greater than 0
+
+	Number: Supports both integer and float(double precision values)
+	Float: Occupies mor ememory so ECMAScript tries to convert the Float to Integer if possible. example: 10.0 --> 10. 
+		Avoid a + b == 0.3 because 0.1 + 0.2 != 0.3 It's equal to 0.3000000004
+
+	NaN: NaN != NaN. Use isNaN() to find whether a number is number or not.
+		example:alert(isNaN(true)); //returns false
+				alert(isNaN("blue")); //returns true because the string cannot be converted to number
+
+	Number Conversion: Number(), parseInt(), parseFloat();
+		Number() - can be used in any data type. Number("Hello"); //NaN; Number(""); //0
+		parseInt() - can be used on strings.It's better than Number();
+			example: parseInt("1234Blue"); //1234
+					 parseInt(true); //NaN only on strings
+					 parseInt('056'); //46 octal representation
+					 parseInt('0xA'); //10 hex
+					 parseInt('10',2); //2
+					 parseInt('10',8); //8
+					 parseInt('10',10);	//10				 
+					 parseInt('10',16); //16
+					 
+	

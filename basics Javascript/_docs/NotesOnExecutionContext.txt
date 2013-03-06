@@ -1,0 +1,9 @@
+In JavaScript every execution takes place inside an Execution context.
+
+Execution Context
+
+	Every time when a control is transfered to a executable code or an function the ecexution context is created.
+
+	Execution context are of three types function context,eval context,global context
+	
+	

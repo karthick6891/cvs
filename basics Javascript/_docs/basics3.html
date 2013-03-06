@@ -1,0 +1,228 @@
+<!DOCTYPE>
+<html>
+<head>
+<Title>Javascriot basics 3</Title>
+</head>
+<body>
+<script type="text/javascript">
+ /**
+ *		DOM is an API for XML that is now extended to HTML, it maps the whole HTML as a hierarchy of nodes
+ *		Other type of DOMS are SVG, MathML  
+ *  	script tag text/javascript
+ *		defer the script
+ *		XHTML escape with CDATA
+ *		http://www.youtube.com/watch?v=awsiJ9jxHIY&list=UUQlNOwZ43H9N1RIe0Df64Yw&index=1&feature=plpp_video
+ **/
+ if(isNaN("true")){
+ ifPattern();
+ declareVariables();
+ incrementDecrement();
+ equals();
+ breakAndContinue();
+ }
+ /***************************************************************************************************************/
+	 //Pattern var variable = preferredObject || backUpObject;
+	 var x;
+	 var y = 5;
+	 var z = x||5;
+	 alert(z); //returns 5;
+  
+ /***************************************************************************************************************/
+	//Pattern 'if(!null || !undefined)'
+	/** Its not necessary to always check if variable == null or variable == undefined
+	 * 	its enough if we put 'if(variable)' this statement ensures that the following statements
+	 *	will be executed if and only if the 'variable' is not null or not undefined. 
+	 *  var message = "Hello world!";
+	 *	if (message){
+	 *	alert("Value is true");
+	 *	}
+	 **/
+	function ifPattern(){
+		var x1;
+		var y1 = null;
+
+		if (x1){
+			alert(x1); //never comes inside
+		}
+
+		if (y1){
+			alert(y1); //never comes inside
+		}
+
+		if(!x1){
+			alert("comes here")
+		}
+		
+		
+	}
+ 
+ /***************************************************************************************************************/
+	 //Short cut 1:
+	 function integerParse(){
+		var x = "1234Sano";
+		var y = Number(x); // NaN;
+		var z = parseInt(x); // 1234; 
+	 }
+ /***************************************************************************************************************/
+	 /** 	Chapter 3
+	 *
+	 *		Follow this pattern to declare the variables
+	 *		Number 070 --> octal 56
+	 *		Number 0xA --> hexadecimal 10
+	 *		NaN != NaN use isNaN()
+	 *		parseInt() is better than Number() because see integerParse() utility
+	 *		
+	 * 		typeof is used to identify primitives
+	 *		instanceof is used to identify objects
+	 *		
+	 *		String
+	 *		Strings are immutable; var lang = "Java"; lang = lang + "Script";
+	 *		var text = "\u03a3.";  text.length; --> returns 2; one for the unicode
+	 *		and second for the dot
+	 *
+	 *		text.toString();//--> Converts to String
+	 *		String(text); //Doesn't give error if text is null or undefined
+	 *		true anything greater than 0
+	 *
+	 **/
+	 function declareVariables(){
+		var x = 5,
+			y = 10,
+			z = 15;
+			console.log("Integer Parse");
+			integerParse();
+	 }
+ 
+ /***************************************************************************************************************/
+	 /**
+	 * 		pre-increment is like increment the value and then assign;
+	 *		eg; ++age; --> age = age +1;
+	 *		post-increment is assign the value and then increment; *
+	 */
+
+	 function incrementDecrement(){
+		var age = 29;
+		++age; //age has become 30 here itself
+		
+		var age1 = 30;
+		age++; //age is still 29
+		age; //age is 30 now
+		
+		var num1 = 2;
+		var num2 = 20;
+		var num3 = num1-- + num2; //equals 22
+		var num4 = num1 + num2; // equals to 21
+	 }
+ /***************************************************************************************************************/
+ 
+	 function equals(){
+		var x= 5;
+		var y = "5";
+		if (x == y){
+		console.log("Equal");
+		}
+		if(x===y){
+			console.log("Identically Equal");
+		}else{
+			console.log("Identically Not Equal");
+		}
+	 }
+ /***************************************************************************************************************/
+	function breakAndContinue(){
+		putBreak();
+		putContinue();
+		var num = 0;
+		outermost:
+		for (var i=0; i < 10; i++) {
+			for (var j=0; j < 10; j++) {
+				if (i == 5 && j == 5) {
+				break outermost;
+				}
+				num++;
+			}
+		}
+		alert(num); //returns 55
+	}
+ 
+ /***************************************************************************************************************/
+	function putBreak(){
+		var num = 0;
+			for (var i=1; i < 10; i++) {
+				if (i % 5 == 0) {
+				break;
+				}
+				num++;
+			}
+			alert(num); //4	
+	}
+ /***************************************************************************************************************/
+	function putContinue(){
+		var num = 0;
+			for (var i=1; i < 10; i++) {
+				if (i % 5 == 0) {
+				continue;
+				}
+				num++;
+			}
+			alert(num); //8	
+	}
+ /***************************************************************************************************************/
+ /***
+ *		Chapter 4:
+ *			primitive - stored on stack (Undefined, Null, Number, String, Boolean)
+ *			reference - stored on heap
+ *			
+ *			typeof - primitives
+ *			instanceof - reference
+ *
+ *			Execution Context & Scope
+ *				The execution context of a variable or function defines what
+ *				other data it has access to, as well as how it should behave.
+ *
+ *				Execution context has a variable object(made of variables and functions)
+ *				which is not accessed by code but its used behind the scenes
+ *			
+ *				a., Global Execution Context - Outermost one, in browsers the global context
+ *				is the 'Window' object. Window Object contains all the global variables
+ *				and functions as properties and methods in it. Context is destroyed
+ *				when we close he browser.
+ *				eg:	Window Object: {var 1,2,3, function1(), function2(), function3()};
+ *
+ *				b., Function exectuion context - When code execution flows into a function 
+ *				this context is created and pushed into the context stack. After execution the 
+ *				context	is popped out of the stack returning the control to the previous 
+ *				execution context
+ *
+ *				Function's execution context is created when the function is loaded
+ *				Scope chain is created when the execution flows into the function
+ *
+ *
+ *
+ * 
+ */
+ 
+ /**************************************************************************/
+ 
+ /**************************************************************************/
+ 
+ /**************************************************************************/
+ 
+ /**************************************************************************/
+ 
+ /**************************************************************************/
+ 
+ /**************************************************************************/
+ 
+ /**************************************************************************/
+ 
+ /**************************************************************************/
+ 
+ /**************************************************************************/
+ /**************************************************************************/
+ 
+ /**************************************************************************/
+ 
+ /**************************************************************************/ 
+</script>
+</body>
+</html>

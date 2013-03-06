@@ -1,0 +1,125 @@
+<!DOCTYPE>
+<html>
+<head>
+<meta name="description" content="Scope Hoisting" />
+<meta name="keywords" content="HTML,CSS,XML,JavaScript" />
+<meta name="author" content="Santhana Rajagopalan" />
+<meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+<Title>javascript scopes</Title>
+
+</head>
+<body>
+<script type="text/javascript">
+ /***
+ *	Hoisting
+ *		The following console statement gives undefined because the basicPattern
+ *		variable will be hoisted and merged.
+ *		
+ *		var basicPattern;
+ *		basicPattern = function basicPattern(){
+										var o = 5;
+
+										return o;
+										};
+ *
+ *		So, this is how the browser evaluates.
+ *		If, the variable(var basicPattern = 10) is defined as 10 then
+ *		var basicPattern;
+		basicPattern = function basicPattern(){
+										var o = 5;
+
+										return o;
+										};
+		basicPattern = 10;
+ *
+ *		
+ *
+ *		
+ *
+ *		
+ *
+ *
+ ***/
+ 
+ function basicPattern(){
+	var o = {
+				valueOf: function(){				
+					return "sano";
+				}
+			};
+ 
+	return o;
+ }
+ 
+ var basicPattern ;
+ console.log(basicPattern); 
+ /**************************************************************************/
+ /***
+ *	Block Level Scopes
+ *
+ *	http://net.tutsplus.com/tutorials/javascript-ajax/quick-tip-javascript-hoisting-explained/
+ */
+ 
+ 
+ /**************************************************************************/
+function a() {
+    alert(this);
+}
+a.call(null);
+ 
+ /**************************************************************************/
+ 
+(function () {
+  alert(this); // null => global
+})();
+ /**************************************************************************/
+ foo();
+ 
+ function foo() {
+  function bar() {
+    alert("foo+bar" +this); // global
+  }
+  bar(); // the same as AO.bar()
+}
+ /**************************************************************************/
+ 
+ 
+ //Variable hoisted in functional scope
+ var myvar = 'my value';  
+  
+(function() {  
+  alert("Hositing" +myvar); // undefined  
+  var myvar = 'local value';  
+})(); 
+ /**************************************************************************/
+ 
+ var x = 10;
+ 
+function food() {
+   
+  var y = 20;
+   
+  function bar() {
+    alert(x + y);
+  }
+   
+  return bar;
+ 
+}
+ 
+food()(); // 30
+ 
+ /**************************************************************************/
+ (function group(x) {
+  alert(x);
+})(1);
+ /**************************************************************************/
+ 
+ /**************************************************************************/
+ 
+ /**************************************************************************/
+ 
+ /**************************************************************************/
+</script>
+</body>
+</html>

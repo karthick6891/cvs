@@ -1,0 +1,19 @@
+<NotepadPlus>
+    <Session activeView="0">
+        <mainView activeIndex="0">
+            <File firstVisibleLine="30" xOffset="0" scrollWidth="976" startPos="1186" endPos="1186" selMode="0" lang="Normal Text" encoding="-1" filename="D:\workspace\basics Javascript\_docs\QuickNotes.txt" />
+            <File firstVisibleLine="0" xOffset="0" scrollWidth="912" startPos="945" endPos="945" selMode="0" lang="HTML" encoding="-1" filename="D:\workspace\basics Javascript\_docs\basics3.html" />
+            <File firstVisibleLine="0" xOffset="0" scrollWidth="816" startPos="0" endPos="0" selMode="0" lang="HTML" encoding="-1" filename="D:\workspace\basics Javascript\_docs\basic.html" />
+            <File firstVisibleLine="77" xOffset="0" scrollWidth="2016" startPos="4717" endPos="4717" selMode="0" lang="HTML" encoding="-1" filename="D:\workspace\basics Javascript\_docs\basics2.html" />
+            <File firstVisibleLine="0" xOffset="0" scrollWidth="96" startPos="0" endPos="0" selMode="0" lang="Normal Text" encoding="-1" filename="D:\workspace\JavaScriptTools.txt" />
+            <File firstVisibleLine="0" xOffset="0" scrollWidth="5528" startPos="0" endPos="0" selMode="0" lang="Normal Text" encoding="-1" filename="D:\workspace\BonsaiDen-JavaScript-Garden-5c5295d\package.json" />
+            <File firstVisibleLine="172" xOffset="0" scrollWidth="5528" startPos="6286" endPos="6286" selMode="0" lang="Javascript" encoding="-1" filename="D:\workspace\BonsaiDen-JavaScript-Garden-5c5295d\build.js" />
+            <File firstVisibleLine="0" xOffset="0" scrollWidth="712" startPos="0" endPos="0" selMode="0" lang="Javascript" encoding="-1" filename="D:\workspace\BonsaiDen-JavaScript-Garden-5c5295d\server.js" />
+            <File firstVisibleLine="3" xOffset="0" scrollWidth="5528" startPos="453" endPos="453" selMode="0" lang="Normal Text" encoding="-1" filename="D:\workspace\BonsaiDen-JavaScript-Garden-5c5295d\garden.jade" />
+            <File firstVisibleLine="0" xOffset="0" scrollWidth="27872" startPos="414" endPos="414" selMode="0" lang="Normal Text" encoding="-1" filename="D:\HTML5 and css3\Links.txt" />
+            <File firstVisibleLine="26" xOffset="0" scrollWidth="2126432" startPos="1320" endPos="1320" selMode="0" lang="HTML" encoding="-1" filename="D:\workspace\basics Javascript\_docs\scopes.html" />
+            <File firstVisibleLine="13" xOffset="0" scrollWidth="616" startPos="440" endPos="440" selMode="0" lang="HTML" encoding="-1" filename="D:\workspace\basics Javascript\_docs\pattens.html" />
+        </mainView>
+        <subView activeIndex="0" />
+    </Session>
+</NotepadPlus>

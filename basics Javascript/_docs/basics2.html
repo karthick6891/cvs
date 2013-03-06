@@ -1,0 +1,198 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
+<!--[if IE]><![endif]-->
+<!--[if lt IE 7 ]> <html lang="en" class="no-js ie6">    <![endif]-->
+<!--[if IE 8 ]>    <html lang="en" class="no-js ie8">    <![endif]-->
+<!--[if IE 9 ]>    <html lang="en" class="no-js ie9">    <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--><html lang="en" class="no-js"><!--<![endif]-->
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>jsTree v.1.0 - checkbox documentation</title>
+	<script type="text/javascript" src="../jquery-1.5.2.min.js"></script>
+	<script type="text/javascript" src="../jquery-ui-1.8.16.custom.min.js"></script>
+	<script type="text/javascript" src="../jquery.jstree_custom.js"></script>
+	<script type="text/javascript" src="../hashmap.js"></script>
+	
+	<link type="text/css" rel="stylesheet" href="syntax/!style.css"/>
+	<link type="text/css" rel="stylesheet" href="!style.css"/>
+	<link type="text/css" rel="stylesheet" href="../jquery-ui-1.8.16.custom.css"/>
+	<link rel="stylesheet" type="text/css" media="screen" href="../ui.jqgrid.css" />
+<link rel="stylesheet" type="text/css" media="screen" href="../ui.multiselect.css" />
+<script src="../grid.locale-en.js" type="text/javascript"></script>
+<!--<script src="../jquery.jqGrid.min.js" type="text/javascript"></script>-->
+<script src="../jquery.jqGrid.src.js" type="text/javascript"></script>
+
+<script src="../jquery.layout.js" type="text/javascript"></script>
+<script src="../ui.multiselect.js" type="text/javascript"></script>
+<script src="../jquery.tablednd.js" type="text/javascript"></script>
+<script src="../jquery.contextmenu.js" type="text/javascript"></script>
+<script src="../custom.worker.js" type="text/javascript"></script>
+	<style id="sano" type="text/css">
+	.ie6 body { 
+    border:1px solid red;
+	}
+	#demo2 {
+	border: 1px solid #A6C9E2;
+	}
+	.ie7 #demo2 { 
+    border: 1px solid red;
+	}
+	.ie8 #demo2 {
+	border: 10px solid red;
+	}
+	</style>
+
+	
+</head>
+<body>
+<div id="container">
+
+<h1>jsTree v.1.0 - checkbox plugin</h1>
+<h2>Description</h2>
+<div id="description">
+<p>The <code>checkbox</code> plugin makes multiselection possible using three-state checkboxes.</p>
+</div>
+
+<h2 id="configuration">Configuration</h2>
+<div class="panel configuration">
+<p>No configuration possible</p>
+</div>
+<select style="width:280px" id="Mobility" name="Mobility"><option selected="">Please Select</option><option>K</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option><option>9</option><option>10</option><option>11</option><option>12</option></select>
+<h2 id="demos">Demos</h2>
+<div class="panel">
+<h3>Using the checkbox plugin - all you need to do is include it in the list of active plugins.</h3>
+
+<input id="myButton" type="button" value="Click Me" onclick="test()"/>
+<input type="button" value="Add" onclick="Add()"/>
+<div id="demo2" class="demo" style="overflow:auto; height: 485px;  width: 200px; font-family: Arial, Verdana, Sans Serif; font-size: 13px; font-style: normal; font-weight: normal;">
+	
+</div>
+
+<div style="width:200px, padding-left: 4px" id="selectedOrgNodesName"><a href="javascript:openTreeNodes('118962');" style="color: blue;text-decoration:underline">Class1</a> , <a href="javascript:openTreeNodes('118344');" style="color: blue;text-decoration:underline">LasDivision</a> , <a href="javascript:openTreeNodes('118604');" style="color: blue;text-decoration:underline">laslinkdivis</a></div>
+
+<script type="text/javascript" class="source">
+var user = "STATE";
+var duumy1 = 5;
+var duumy2 = 5;
+var handler={};
+var arr = [1,2,3,4];
+//Function syntax type 1
+var timer = {
+time: undefined,
+setStartTime: function () {
+d = new Date();
+this.time = d.getTime();
+},
+
+getDiff: function () {
+d = new Date();
+return d.getTime() - this.time;
+}
+}
+
+function test(){
+console.log("test called");
+handler.start();
+argumentsCalleTester();
+}
+
+function argumentsCalleTester(){
+	var timer;
+	if (arr.length > 0){
+		console.log("Add called");
+		arr.shift();
+		 /*arguments.callee calls the method in which it's declared ie., the scope is restricted to the function its declared. For Example here, since it's declared within the function argumentsCalleTester() the argumenstsCalletester method is called. 
+		consider that it's described inside the function which is present inside the setTimeOut then that anonymous function is only called and not the argumentsCalleTester */
+		arguments.callee();
+		timer = setTimeout(function(){
+			console.log("Inside Timer");
+		},1000);
+	}
+	else{
+	clearTimeout(timer);
+	}
+}
+
+function Add(){
+arr.shift();
+console.log("array value" + arr);
+//arguments.callee();
+}
+
+
+function createJsonData(){
+
+}
+
+function testWorker(){
+
+}
+
+(function(y){
+var x = "Hi";
+		y.start= function(){
+		console.log("x"+x);
+		};
+		y.set= function(args){
+			x = args;
+		};
+		y.reset= function(args){
+			x = "hio";
+		};
+	}
+)(handler);
+ 
+ 	var onChangeHandler = (function(){
+		var editPopUpChange = "F";
+	
+		return{
+			register: function(args){
+				$('#'+args).change(function(e){ 
+					switch(args){
+						case "Select_Test":
+											editPopUpChange = "T";
+											break;
+						case "testDetailId":
+											editPopUpChange = "T";
+											break;
+						case "addStudentId":
+											editPopUpChange = "T";
+											break;
+						case "addProctorId":
+											editPopUpChange = "T";
+											break;			
+					}				
+				});			
+			},
+			getData: function(){
+				return editPopUpChange;				
+			},
+			reset: function(){		
+				editPopUpChange = "F";	
+			}
+		}		
+	})();
+
+</script>
+
+</div>
+
+My check node is : Node : CN Da Nang and all child of it, but another node is determind
+<input type="button" value="createJsonData" onclick="createJsonData()" />
+<input type="text" id="numberOfJson" value="" />
+<input type="button" value="worker" onclick="testWorker()" />
+<div id="top" align="center" style="background-color: #D4ECFF; height: 550px; width: 250px;">
+<div id="nested" style="background-color: #FFFFFF;height: 500px; width: 200px;"></div> 
+</div>
+<table id="list2"></table> <div id="plist2"></div>
+<div id="pop" title="dummy" style="display: none; background-color: #D4ECFF; font-family: Arial, Verdana, Sans Serif; font-size: 12px; font-style: normal; font-weight: normal;">
+<div  id="innerID" style="overflow:auto; height: 235px;  width: 350px; font-family: Arial, Verdana, Sans Serif; font-size: 13px; font-style: normal; font-weight: normal; position: absolute;">
+</div>
+</div>
+
+</div>
+
+</div>
+</body>
+</html>
