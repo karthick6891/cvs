@@ -17,3 +17,38 @@
         <subView activeIndex="0" />
     </Session>
 </NotepadPlus>
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Sample</title>
+<link rel="stylesheet" href="css/master.css" />
+<link rel="stylesheet" href="css/header.css" />
+<link rel="stylesheet" href="css/footer.css" />
+<link rel="stylesheet" href="jquery.mobile-1.3.0/jquery.mobile-1.3.0.css" />
+<script type="text/javascript" src="./js/jquery-1.8.2.js"></script>
+<script type="text/javascript" src="jquery.mobile-1.3.0/jquery.mobile-1.3.0.js"></script>
+
+<!--  <link rel="stylesheet" media="only screen and (min-width: 985px)" href="/css/media-985.css" />
+  <link rel="stylesheet" media="only screen and (max-width: 768px)" href="/css/media-768.css" />
+  <link rel="stylesheet" media="only screen and (max-width: 480px)" href="/css/media-480.css" />
+  <link rel="stylesheet" media="only screen and (max-width: 320px)" href="/css/media-320.css" />-->
+  
+  <!--Fixes-->
+  <style>
+ img, embed, object, video {
+    		max-width:100%;
+		}
+	</style>	
+</head>
+
+<body>
+<div data-role="header" data-theme="c" data-position="fixed">
+	<h1 class="norm " style="font-size : 1.5em " ></h1>
+	<h1 class="mob" style="font-size : 1.5em; display:none" ></h1>
+		<img class="ui-btn-left" title="Nissan Logo"
+				src="logo.png" />
+</div>
+</body>
+</html>
