@@ -18,15 +18,89 @@
     </Session>
 </NotepadPlus>
 
+/**************************/
+header {
+
+	background: #fff;
+	width: 100%;
+	position: fixed;
+	top: 0;
+	left: 0;
+	border-bottom: 1px solid #AAAAA1;
+	z-index: 100;
+
+}
+
+ .amenu,.amenu:link {
+
+	color: #4C9CF1;
+	text-decoration: none;
+	font-weight: bold;
+
+}
+.amenu:hover{
+		color: #444;
+}
+.current {
+	color: #2262AD !important;
+}
+a:hover {
+
+	color: #444;
+
+}
+
+.menu {
+
+	float: right;
+	padding: 20px;	
+	
+}
+.current {
+
+	color: #2262AD;
+
+}
+#menu-icon {
+
+	display: hidden;
+	width: 40px;
+	height: 40px;
+	background: #4C8FEC url(../img/menu-icon.png) center;
+
+}
+
+.amenu:hover#menu-icon {
+
+	background-color: #444;
+	border-radius: 4px 4px 0 0;
+
+}
+
+.ulmenu {
+
+	list-style: none;
+
+}
+
+.limenu {
+
+	display: inline-block;
+	float: left;
+	padding: 10px
+
+}
+/********************************************************/
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="utf-8">
+<meta name="viewport" content="width=device-width; initial-scale=1; maximum-scale=1">
 <title>Sample</title>
 <link rel="stylesheet" href="css/master.css" />
+<link rel="stylesheet" href="jquery.mobile-1.3.0/jquery.mobile-1.3.0.css" />
 <link rel="stylesheet" href="css/header.css" />
 <link rel="stylesheet" href="css/footer.css" />
-<link rel="stylesheet" href="jquery.mobile-1.3.0/jquery.mobile-1.3.0.css" />
 <script type="text/javascript" src="./js/jquery-1.8.2.js"></script>
 <script type="text/javascript" src="jquery.mobile-1.3.0/jquery.mobile-1.3.0.js"></script>
 
@@ -37,18 +111,306 @@
   
   <!--Fixes-->
   <style>
- img, embed, object, video {
-    		max-width:100%;
-		}
+
 	</style>	
 </head>
 
 <body>
 <div data-role="header" data-theme="c" data-position="fixed">
-	<h1 class="norm " style="font-size : 1.5em " ></h1>
-	<h1 class="mob" style="font-size : 1.5em; display:none" ></h1>
-		<img class="ui-btn-left" title="Nissan Logo"
-				src="logo.png" />
+	<h1 class="norm " style="font-size : 1.25em " >sample</h1>
+	<h1 class="mob" style="font-size : 1.25em; display:none" >NMAC</h1>
+		<img class="ui-btn-left" title="sa" src="logo.png" />
+		<nav class="menu">
+			<a href="#" id="menu-icon"></a>
+			<ul class="ulmenu">
+				<li class="limenu"><a href="#" class="amenu current" data-role="none">Account</a></li>
+				<li class="limenu"><a href="#" class="amenu" data-role="none">Statements</a></li>
+				<li class="limenu"><a href="#" class="amenu" data-role="none">Payments</a></li>
+				<li class="limenu"><a href="#" class="amenu" data-role="none">Profile</a></li>
+				<li class="limenu"><a href="#" class="amenu" data-role="none">Contact</a></li>
+			</ul>
+		</nav>
 </div>
 </body>
 </html>
+/**************************************************/
+/***** Global Settings *****/
+ 
+html, body {
+border:0;
+margin:0;
+padding:0;
+}
+ 
+body {
+font:100%/1.25 Arial, Helvetica, sans-serif;
+}
+ 
+/***** Headings *****/
+ 
+h1, h2, h3, h4, h5, h6 {
+margin:0;
+padding:0;
+font-weight:normal;
+}
+ 
+h1 {
+padding:30px 0 25px 0;
+letter-spacing:-1px;
+font-size:2em;
+}
+ 
+h2 {
+padding:20px 0;
+letter-spacing:-1px;
+font-size:1.5em;
+}
+ 
+h3 {
+font-size:1em;
+font-weight:bold;
+}
+ 
+/***** Common Formatting *****/
+ 
+p, ul, ol {
+margin:0;
+padding:0 0 1.25em 0;
+}
+ 
+ul, ol {
+padding:0 0 1.25em 2.5em;
+}
+ 
+blockquote {
+margin:1.25em;
+padding:1.25em 1.25em 0 1.25em;
+}
+ 
+small {
+font-size:0.85em;
+}
+
+/* ==========================================================================
+   Embedded content
+   ========================================================================== */
+
+/**
+ * Remove border when inside `a` element in IE 8/9.
+ */ 
+img {
+border:0;
+max-width:100%;
+}
+
+/**
+ * Set consistent quote types.
+ */
+
+q {
+    quotes: "\201C" "\201D" "\2018" "\2019";
+} 
+sup {
+position:relative;
+bottom:0.3em;
+vertical-align:baseline;
+}
+ 
+sub {
+position:relative;
+bottom:-0.2em;
+vertical-align:baseline;
+}
+ 
+acronym, abbr {
+cursor:help;
+letter-spacing:1px;
+border-bottom:1px dashed;
+}
+ 
+/***** Links *****/
+ 
+a,
+a:link,
+a:visited,
+a:hover {
+text-decoration:underline;
+}
+ 
+/***** Forms *****/
+ 
+form {
+margin:0;
+padding:0;
+display:inline;
+}
+ 
+input, select, textarea {
+font:1em Arial, Helvetica, sans-serif;
+}
+
+/**
+ * 1. Correct font family not being inherited in all browsers.
+ * 2. Correct font size not being inherited in all browsers.
+ * 3. Address margins set differently in Firefox 4+, Safari 5, and Chrome.
+ */
+
+button,
+input,
+select,
+textarea {
+    font-family: inherit; /* 1 */
+    font-size: 100%; /* 2 */
+    margin: 0; /* 3 */
+}
+
+/**
+ * Address Firefox 4+ setting `line-height` on `input` using `!important` in
+ * the UA stylesheet.
+ */
+
+button,
+input {
+    line-height: normal;
+}
+
+/**
+ * Address inconsistent `text-transform` inheritance for `button` and `select`.
+ * All other form control elements do not inherit `text-transform` values.
+ * Correct `button` style inheritance in Chrome, Safari 5+, and IE 8+.
+ * Correct `select` style inheritance in Firefox 4+ and Opera.
+ */
+
+button,
+select {
+    text-transform: none;
+}
+
+/**
+ * 1. Avoid the WebKit bug in Android 4.0.* where (2) destroys native `audio`
+ *    and `video` controls.
+ * 2. Correct inability to style clickable `input` types in iOS.
+ * 3. Improve usability and consistency of cursor style between image-type
+ *    `input` and others.
+ */
+
+button,
+html input[type="button"], /* 1 */
+input[type="reset"],
+input[type="submit"] {
+    -webkit-appearance: button; /* 2 */
+    cursor: pointer; /* 3 */
+}
+
+/**
+ * Re-set default cursor for disabled elements.
+ */
+
+button[disabled],
+html input[disabled] {
+    cursor: default;
+}
+
+/**
+ * 1. Address box sizing set to `content-box` in IE 8/9.
+ * 2. Remove excess padding in IE 8/9.
+ */
+
+input[type="checkbox"],
+input[type="radio"] {
+    box-sizing: border-box; /* 1 */
+    padding: 0; /* 2 */
+}
+
+/**
+ * 1. Address `appearance` set to `searchfield` in Safari 5 and Chrome.
+ * 2. Address `box-sizing` set to `border-box` in Safari 5 and Chrome
+ *    (include `-moz` to future-proof).
+ */
+
+input[type="search"] {
+    -webkit-appearance: textfield; /* 1 */
+    -moz-box-sizing: content-box;
+    -webkit-box-sizing: content-box; /* 2 */
+    box-sizing: content-box;
+}
+
+/**
+ * Remove inner padding and search cancel button in Safari 5 and Chrome
+ * on OS X.
+ */
+
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-decoration {
+    -webkit-appearance: none;
+}
+
+/**
+ * Remove inner padding and border in Firefox 4+.
+ */
+
+button::-moz-focus-inner,
+input::-moz-focus-inner {
+    border: 0;
+    padding: 0;
+}
+
+/**
+ * 1. Remove default vertical scrollbar in IE 8/9.
+ * 2. Improve readability and alignment in all browsers.
+ */ 
+textarea {
+width:100%;
+line-height:1.25;
+overflow: auto; /* 1 */
+vertical-align: top; /* 2 */
+}
+ 
+label {
+cursor:pointer;
+}
+ 
+/***** Tables *****/
+ 
+table {
+border:0;
+margin:0 0 1.25em 0;
+padding:0;
+}
+ 
+table tr td {
+padding:2px;
+}
+ 
+/***** Wrapper *****/
+ 
+#wrap {
+width:960px;
+margin:0 auto;
+}
+ 
+/***** Global Classes *****/
+ 
+.clear         { clear:both; }
+.float-left    { float:left; }
+.float-right   { float:right; }
+ 
+.text-left     { text-align:left; }
+.text-right    { text-align:right; }
+.text-center   { text-align:center; }
+.text-justify  { text-align:justify; }
+ 
+.bold          { font-weight:bold; }
+.italic        { font-style:italic; }
+.underline     { border-bottom:1px solid; }
+.highlight     { background:#ffc; }
+ 
+.wrap          { width:960px;margin:0 auto; }
+ 
+.img-left      { float:left;margin:4px 10px 4px 0; }
+.img-right     { float:right;margin:4px 0 4px 10px; }
+ 
+.nopadding     { padding:0; }
+.noindent      { margin-left:0;padding-left:0; }
+.nobullet      { list-style:none;list-style-image:none; }
+/*************************************************/
