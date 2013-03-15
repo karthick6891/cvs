@@ -1,3 +1,285 @@
 /*
 * Sample Commit
 */
+public class ModelBean{
+
+    private String firstName;
+    private String lastName;
+    private String email;
+    private String phone;
+
+    public String getFirstName()
+    {
+        return fixNull(this.firstName);
+    }
+
+    public void setFirstName(String firstName)
+    {
+        this.firstName = firstName;
+    }
+
+    public String getLastName()
+    {
+        return fixNull(this.lastName);
+    }
+
+    public void setLastName(String lastName)
+    {
+        this.lastName = lastName;
+    }
+
+    public String getEmail()
+    {
+        return fixNull(this.email);
+    }
+
+    public void setEmail(String email)
+    {
+        this.email = email;
+    }
+
+
+    public String getPhone()
+    {
+        return fixNull(this.phone);
+    }
+
+    public void setPhone(String phone)
+    {
+        this.phone = phone;
+    }
+    
+    private String fixNull(String in)
+    {
+        return (in == null) ? "" : in;
+    }
+
+    public String getMessage()
+    {
+        return "\nFirst Name: " + getFirstName() + "\n"
+             +   "Last Name:  " + getLastName()  + "\n"
+             +   "Email:      " + getEmail()     + "\n"
+             +   "Phone:      " + getPhone()     + "\n";
+    }
+
+    
+    public String toString(){
+        return getMessage();
+    }
+}
+
+
+
+/**************************************/
+public interface Command
+{
+
+    public void execute(HttpServletRequest request, 
+                        HttpServletResponse response) 
+                    throws ServletException, IOException;
+}
+
+/***************************************/
+
+public class InitCommand implements Command
+{
+
+    public void execute(HttpServletRequest  request, HttpServletResponse response) throws ServletException, IOException
+    {
+        request.setAttribute("modelBean", new ModelBean());
+
+        ServletContext context = request.getSession().getServletContext();
+        context.getRequestDispatcher("/view.jsp").forward(request, response);
+        
+    }
+}
+/**********************************************/
+
+public class WriteCommand implements Command
+{
+
+    public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
+    {
+        ModelBean modelBean = new ModelBean();
+
+        modelBean.setFirstName(request.getParameter("first_name")); 
+        modelBean.setLastName( request.getParameter("last_name")); 
+        modelBean.setEmail(    request.getParameter("email")); 
+        modelBean.setPhone(    request.getParameter("phone")); 
+
+        request.setAttribute("modelBean", modelBean);
+
+        ServletContext context = request.getSession().getServletContext();
+        context.getRequestDispatcher("/view.jsp").forward(request, response);
+    }
+}
+/******************************************************/
+
+@WebServlet( name="ControllerServlet", displayName="Controller Servlet", urlPatterns = {"/ControllerServlet","*.do"}, loadOnStartup=1)
+public class ControllerServlet extends HttpServlet {
+  private static final long serialVersionUID = 1L;
+	 private Map<String,Command> commands = new HashMap<String,Command>();
+       
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public ControllerServlet() {
+        super();
+        // TODO Auto-generated constructor stub
+        this.commands.put("init",  new InitCommand());
+        this.commands.put("write", new WriteCommand());
+    }
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		processCommand(request, response);
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		processCommand(request, response);
+	}
+	
+	 public void processCommand(HttpServletRequest  request, HttpServletResponse response) 
+	            throws ServletException, IOException
+	    {
+
+	        String formAction = request.getParameter("form_action");
+	        System.out.println("FORM ACTION: " + formAction);
+	        if(null == formAction){
+	            formAction = "init";
+	        }
+
+	        Command command = commands.get(formAction);
+
+	        if(null == command){
+	            throw new IllegalArgumentException( "No command for form action: " + formAction);
+	        }
+
+	        command.execute(request, response);
+	    }
+
+}
+
+
+/******************************************/
+
+<html manifest="cache.manifest">
+  <head>
+    <title>
+      Pattern Test
+    </title>
+    <link rel="stylesheet" href="resources/css/style.css" type="text/css" />
+    <script type="text/javascript" src="resources/js/cachemonitor.js" ></script> 
+  </head>
+  <body onload="registerListeners()">
+    <h2>Pattern Test</h2>
+    <br />
+    <p>
+    Simple MVC and Cache manifest
+    <div>
+      <a href="init.do">Simple MVC Command v30</a>
+     <p id="text">Init</p>
+    </div>
+    </p>    
+    <img src="resources/img/Hydrangeas.jpg">
+    <br />    
+    <img src="resources/img/Koala.jpg">
+    <br />    
+    <br />    
+
+    <br /> 
+    <video id="player1" width="320" height="240" controls="controls">
+  		<source src="resources/video/big_buck_bunny.mp4" type="video/mp4">
+  		Your browser does not support the video tag.
+	</video>   
+	<br />    
+    <br />   
+    <video id="player2" width="320" height="240" controls="controls">
+  		<source src="resources/video/big_buck_bunny_1.mp4" type="video/mp4">
+  		Your browser does not support the video tag.
+	</video>   
+    <br />    
+    <br />    
+        <video id="player3" width="320" height="240" controls="controls">
+  		<source src="resources/video/big_buck_bunny_2.mp4" type="video/mp4">
+  		Your browser does not support the video tag.
+	</video>  
+	<br />    
+	<br />     
+    <p>
+    </p>
+  </body>
+</html>
+
+/*************************************/
+<!-- Author: Ben Souther; ben@javaranch.com -->
+<html>
+  <head>
+    <title>Simple Command</title>
+  </head>
+  <body>
+    <h2>Simple Command</h2>  
+    <form method="post" action="controller.do">
+      <input type="hidden" name="form_action" value="write" />
+      <table>
+        <tr>
+          <td>
+            First Name:
+          </td>
+          <td>
+            <input type="text" name="first_name" value="${modelBean.firstName}" />
+          </td>
+        </tr>
+        <tr>
+          <td>
+            Last Name:
+          </td>
+          <td>
+            <input type="text" name="last_name" value="${modelBean.lastName}" />
+          </td>
+        </tr>
+        <tr>
+          <td>
+            Email:
+          </td>
+          <td>
+            <input type="text" name="email" value="${modelBean.email}" />
+          </td>
+        </tr>
+        <tr>
+          <td>
+            Phone:
+          </td>
+          <td>
+            <input type="text" name="phone" value="${modelBean.phone}" />
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <input type="submit" name="enter_button" value="Enter" />
+          </td>
+          <td>
+          </td>
+        </tr>
+      </table>
+    </form>
+    <pre>
+      ${modelBean.message}
+    <pre>
+    <br />    
+    <br />    
+    <br />    
+    <br />    
+    <br />    
+    <br />    
+    <p>
+    </p>
+  </body>
+</html>
