@@ -283,3 +283,311 @@ public class ControllerServlet extends HttpServlet {
     </p>
   </body>
 </html>
+/**************************************************************************************/
+package com.infy.Listener;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.nio.CharBuffer;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
+
+import javax.servlet.ServletContext;
+import javax.servlet.ServletContextEvent;
+import javax.servlet.ServletContextListener;
+import javax.servlet.annotation.WebListener;
+
+import org.apache.catalina.websocket.WsOutbound;
+
+
+
+
+@WebListener
+public class Listener implements ServletContextListener {
+	ServletContext context;
+	private static HashMap<String, Long> fileInfo = new HashMap<String, Long>();
+	private static String fileLookupPath = "";
+	private final ScheduledExecutorService scheduler = Executors
+			.newScheduledThreadPool(1);
+	private static Boolean fileBackUp = false;
+	private static Map<String, Long> oldFileInfo = new HashMap<String, Long>();
+
+	public void contextInitialized(ServletContextEvent contextEvent) {
+		System.out.println("Context Created");
+		context = contextEvent.getServletContext();
+		// set variable to servlet context
+		fileLookupPath = context.getRealPath("resources");
+		String realContextPath = context.getRealPath("resources");
+
+		// Done for the first time alone when the server starts up because
+		// chances are that server is shutdown and resources are updated
+		try {
+			File dir = new File(fileLookupPath).getCanonicalFile();
+			FileInputStream fis = new FileInputStream(dir
+					+ "/resources.metadata");
+			loadMaps(fis);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		Runnable runner = new Runnable() {
+
+			public void run() {
+				populateFileInfo();
+			}
+		};
+
+		scheduler.scheduleWithFixedDelay(runner, 0, 15, TimeUnit.SECONDS);
+	}
+
+	public void contextDestroyed(ServletContextEvent contextEvent) {
+		try {
+			File dir = new File(fileLookupPath).getCanonicalFile();
+			FileOutputStream fos = new FileOutputStream(dir
+					+ "/resources.metadata");
+
+			saveMaps(fos);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		context = contextEvent.getServletContext();
+		System.out.println("Context Destroyed");
+		scheduler.shutdown();
+	}
+
+	private void populateFileInfo() {
+		// Already populated
+		if (fileInfo.size() > 0) {
+			try {
+				System.out.println("FILE INFO SIZE GREATER"
+						+ context.getAttribute("Sockets"));
+				File dir = new File(fileLookupPath).getCanonicalFile();
+				File[] files = dir.listFiles();
+				searchFilesInDirectory(files);
+				String msg = getUpdatedFiles(oldFileInfo, fileInfo);
+
+				if (context.getAttribute("Sockets") != null) {
+					ArrayList<updateStatus> socketList = (ArrayList<updateStatus>) context
+							.getAttribute("Sockets");
+					for (updateStatus messageInbound : socketList) {
+						CharBuffer msgBuffer1 = CharBuffer.wrap("MSG1");
+						CharBuffer msgBuffer2 = CharBuffer.wrap(msg);
+						WsOutbound outbound = messageInbound.getWsOutbound();
+						/*
+						 * if (messageInbound.getUserName() !=
+						 * this.getUserIdName()) {
+						 * outbound.writeTextMessage(msgBuffer1);
+						 * outbound.flush(); } else {
+						 * outbound.writeTextMessage(msgBuffer2); } WsOutbound
+						 * outbound = messageInbound.getWsOutbound();
+						 */
+						outbound.writeTextMessage(msgBuffer2);
+
+					}
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+
+		} else {
+			try {
+
+				File dir = new File(fileLookupPath).getCanonicalFile();
+
+				File[] files = dir.listFiles();
+				searchFilesInDirectory(files);
+
+				System.out.println("PATH: " + fileLookupPath);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
+	private void searchFilesInDirectory(File[] files) {
+		for (File file : files) {
+			if (file.isDirectory()) {
+				searchFilesInDirectory(file.listFiles());
+			} else {
+				if (!file.getName().contains(".css")
+						|| !file.getName().contains(".js")) {
+		
+					fileInfo.put(file.getName(), file.lastModified());
+
+				}
+			}
+		}
+
+	}
+
+	private String getUpdatedFiles(Map<String, Long> oldMap,
+			HashMap<String, Long> newMap) {
+		String msg = "null";
+		for (Entry<String, Long> entry : oldMap.entrySet()) {
+			String key = entry.getKey();
+			Long oldTime = entry.getValue();
+			System.out.println("Entry.getKey()" + entry.getKey()+ "::" +entry.getValue());
+			if (newMap.get(key).longValue() > oldTime) {
+				msg = msg + newMap.get(key);
+				System.out.println("Entry.getKey()" + entry.getKey()+ "::" +entry.getValue());
+			}
+		}
+		oldFileInfo = fileInfo;
+		return msg;
+	}
+
+	public void saveMaps(FileOutputStream fos) {
+		try {
+			ObjectOutputStream s = new ObjectOutputStream(fos);
+			s.writeObject(fileInfo);
+			s.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+	}
+
+	public Map<String, Long> loadMaps(FileInputStream fis) {
+		try {
+			ObjectInputStream s = new ObjectInputStream(fis);
+			oldFileInfo = (Map<String, Long>) s.readObject();
+			s.close();
+			return oldFileInfo;
+
+		} catch (Exception e) {
+			// Catch exceptions
+		}
+		return null;
+	}
+}
+/************************************************************/
+
+
+
+import java.io.IOException;
+import java.nio.ByteBuffer;
+import java.nio.CharBuffer;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
+import javax.servlet.ServletConfig;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+
+import org.apache.catalina.websocket.MessageInbound;
+import org.apache.catalina.websocket.StreamInbound;
+import org.apache.catalina.websocket.WebSocketServlet;
+import org.apache.catalina.websocket.WsOutbound;
+
+
+
+
+
+@WebServlet( name="UpdateStatus", displayName="Update Status", urlPatterns = {"/UpdateStatus","*.*"}, loadOnStartup=1)
+public class UpdateStatus extends WebSocketServlet {
+	private static final long serialVersionUID = 1L;
+	private static HashMap<String , Long> fileInfo = new HashMap<String, Long>();
+	private HttpServletRequest httpRequest;
+	//private static List<UpdateMessageInbound> socketList = new ArrayList<UpdateMessageInbound>();
+	private static List<updateStatus> socketList = new ArrayList<updateStatus>();	
+       
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public UpdateStatus() {
+        super();
+        // TODO Auto-generated constructor stub
+        System.out.println("UPDATE STATUS");
+        
+    }
+
+    public void init(ServletConfig config) throws ServletException {  
+    	super.init(config); //added this line then it worked
+    	System.out.println("UPDATE CONFIG");
+    	System.out.println(getServletContext().getAttribute("TEST"));
+
+    }    
+    
+    @Override
+    protected StreamInbound createWebSocketInbound(String arg0,
+            HttpServletRequest arg1) {
+
+        //return new UpdateMessageInbound();
+    	return new updateStatus();
+    }
+
+    /*public static synchronized List<UpdateMessageInbound> getSocketList() {
+        return socketList;
+    }*/
+    public static synchronized List<updateStatus> getSocketList() {
+        return socketList;
+    }
+    public class updateStatus extends MessageInbound
+    {
+        private WsOutbound outbound;
+        private int userIdName = 0;
+        @Override
+        public void onOpen( WsOutbound outbound )
+        {
+            this.outbound = outbound;
+            this.userIdName = outbound.hashCode();
+             System.out.println("socket opened!");
+             getServletContext().setAttribute("channel", this.outbound);
+             getSocketList().add(this);
+        }
+
+        @Override
+        public void onTextMessage( CharBuffer buffer ) throws IOException
+        {
+            try
+            {
+            	
+            	if(buffer.toString().equalsIgnoreCase("UPDATE")){
+            		
+                    outbound.writeTextMessage( CharBuffer.wrap( "abc testing".toCharArray() ) );
+                    System.out.println("Message sent from server.");
+                    getServletContext().setAttribute("Sockets", getSocketList());
+                   
+            	}
+
+            }
+            catch ( IOException ioException )
+            {
+                    System.out.println("error opening websocket");
+            }
+
+        }
+
+        @Override
+        protected void onBinaryMessage(ByteBuffer arg0) throws IOException {
+            // TODO Auto-generated method stub
+
+        }
+        
+
+
+        @Override
+        protected void onClose(int status){
+        	System.out.println("Connection close" + status);
+        	getSocketList().remove(this);
+        }
+        public int getUserName(){
+        	return userIdName;
+        }
+    }
+
+
+}
+
+
