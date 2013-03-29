@@ -2,3 +2,6 @@ Jquery Mobile Notes
 
 data-role = none for removing the css
 data-inline="true" for sizing the button with respect to the text
+
+Binary conversion
+"0000".substring(n.length) + n
