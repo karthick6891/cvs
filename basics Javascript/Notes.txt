@@ -3,5 +3,29 @@ Jquery Mobile Notes
 data-role = none for removing the css
 data-inline="true" for sizing the button with respect to the text
 
-Binary conversion
+Binary conversion:
+Number format conversion
 "0000".substring(n.length) + n
+
+
+HttpPost post = new HttpPost(tokenUrl); 
+
+  	try {
+
+			LinkedList<NameValuePair> parameters = new LinkedList<NameValuePair>();
+			parameters.add(new BasicNameValuePair("grant_type", "password"));
+			parameters.add(new BasicNameValuePair("client_id", "3MVG9Y6d_Btp4xp7TLz.MawDiBDpF1UwPCQaytt_s0Q6N_u0awRnQXU.RJbmtSQarFa_yQAG5g0TaHoOlt6VY"));
+			parameters.add(new BasicNameValuePair("client_secret", "2114292394426797414"));
+			parameters.add(new BasicNameValuePair("username", "santhana@gmail.com"));
+			parameters.add(new BasicNameValuePair("password", "Chennai@1ySzWty98Qy77NtP0p5YDCd2b"));
+
+			post.setEntity(new UrlEncodedFormEntity(parameters, "UTF-8"));
+
+
+			HttpResponse response = httpclient.execute(post,localContext);
+			JSONObject authResponse = getResponse(response);
+
+
+			return new AccessToken(authResponse.getString("access_token"), authResponse.getString("instance_url"));
+
+		} 
