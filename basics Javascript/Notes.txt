@@ -7,6 +7,14 @@ Binary conversion:
 Number format conversion
 "0000".substring(n.length) + n
 
+Word search
+
+var str = "Not less than 30 net ft2 someft2(2.8 net m2)";
+str.replace(/ft2/g,"ft<sup>2</sup>");
+	"Not less than 30 net ft<sup>2</sup> someft<sup>2</sup>(2.8 net m2)"
+str.replace(/\bft2\b/g,"ft<sup>2</sup>");
+	"Not less than 30 net ft<sup>2</sup> someft2(2.8 net m2)"
+
 
 HttpPost post = new HttpPost(tokenUrl); 
 
