@@ -19,6 +19,12 @@ To replace both ft2 and m2 to superscript
 str = str.replace(/(ft|m)2/g,"$1<sup>2</sup>");
 
 
+var str= "This shirt, is very nice. It costs DKK 1.500,00";
+var pattern =/(\d+\.\d+)+,\d+/g;
+str.match(pattern);
+["1.500,00"]
+
+
 HttpPost post = new HttpPost(tokenUrl); 
 
   	try {
