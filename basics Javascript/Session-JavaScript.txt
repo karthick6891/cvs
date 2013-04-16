@@ -21,6 +21,9 @@
 *****************************************************************************************************************
 Links
 http://garmahis.com/tutorials/pixel-art-tutorials/
+http://stackoverflow.com/questions/7344886/visual-viewport-vs-layout-viewport-on-mobile-devices
+http://www.quirksmode.org/mobile/viewports2.html
+http://stackoverflow.com/questions/6333927/difference-between-visual-viewport-and-layout-viewport
 *****************************************************************************************************************
 SO
 1. Java doesn't allow multiple inheritance but it allows implementing multiple interfaces. Why?
