@@ -17,5 +17,15 @@
         <subView activeIndex="0" />
     </Session>
 </NotepadPlus>
+
+*****************************************************************************************************************
 Links
 http://garmahis.com/tutorials/pixel-art-tutorials/
+*****************************************************************************************************************
+SO
+1. Java doesn't allow multiple inheritance but it allows implementing multiple interfaces. Why?
+    
+    Because interfaces specify only what the class is doing, not how it is doing it.
+    
+    The problem with multiple inheritance is that two classes may define different ways of doing the same thing, and the subclass can't choose which one to pick.
+
