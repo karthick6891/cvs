@@ -24,6 +24,9 @@ var pattern =/(\d+\.\d+)+,\d+/g;
 str.match(pattern);
 ["1.500,00"]
 
+string = "1 south african rand is 0.11044"
+console.log (string.replace(/(-?\d*\.\d+)/, ''));
+[1 south african rand is]
 
 HttpPost post = new HttpPost(tokenUrl); 
 
