@@ -27,5 +27,8 @@ SO
     
     Because interfaces specify only what the class is doing, not how it is doing it.
     
-    The problem with multiple inheritance is that two classes may define different ways of doing the same thing, and the subclass can't choose which one to pick.
-
+        The problem with multiple inheritance is that two classes may define different ways of doing the same thing, and the subclass can't choose which one to pick.
+    
+    You're probably confused because you view multiple inheritance locally, in terms of one class inheriting implementation details from multiple parents. This is not possible in Java (and often leads to abuse in languages where it's possible).
+    
+    Interfaces allow multiple inheritance of types, e.g. a class Waterfowl extends Bird implements Swimmer can be used by other classes as if it were a Bird and as if it were a Swimmer. This is the the deeper meaning of multiple inheritance: allowing one object to act like it belongs to several unrelated different classes at once
