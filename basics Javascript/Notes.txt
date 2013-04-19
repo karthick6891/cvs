@@ -18,12 +18,19 @@ str.replace(/\bft2\b/g,"ft<sup>2</sup>");
 To replace both ft2 and m2 to superscript
 str = str.replace(/(ft|m)2/g,"$1<sup>2</sup>");
 
-
+/**********************************************/
 var str= "This shirt, is very nice. It costs DKK 1.500,00";
 var pattern =/(\d+\.\d+)+,\d+/g;
 str.match(pattern);
 ["1.500,00"]
 
+string = "1 south african rand is 0.11044"
+console.log (string.replace(/(-?\d*\.\d+)/, ''));
+[1 south african rand is]
+
+^((?!\d+\.\d+).)*
+
+/********************************************/
 
 HttpPost post = new HttpPost(tokenUrl); 
 
