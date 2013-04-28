@@ -17,7 +17,10 @@
         <subView activeIndex="0" />
     </Session>
 </NotepadPlus>
-
+/*****************From home****************************************/
+http://alistapart.com/article/application-cache-is-a-douchebag
+http://edgeconf.com/
+http://blog.sethladd.com/2010/10/proposal-to-enhance-html5-app-cache.html
 *****************************************************************************************************************
 Links
 http://garmahis.com/tutorials/pixel-art-tutorials/
