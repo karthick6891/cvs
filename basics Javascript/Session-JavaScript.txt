@@ -48,3 +48,4 @@ http://stackoverflow.com/questions/10099059/what-are-the-key-differences-between
 http://coding.smashingmagazine.com/2012/07/27/journey-through-the-javascript-mvc-jungle/
 http://todomvc.com/
 http://codebrief.com/2012/01/the-top-10-javascript-mvc-frameworks-reviewed/
+http://web.mit.edu/6C3C3C6C-F0FD-4DB0-A74E-B98116A2DE86/FinalDownload/DownloadId-93B496327D1E48FA399C4C1A42C96BF6/6C3C3C6C-F0FD-4DB0-A74E-B98116A2DE86/itag/eag/FullEnterpriseArchitectureGuide0.1.pdf
