@@ -44,3 +44,7 @@ SO
 29/4/2013
 http://net.tutsplus.com/tutorials/html-css-techniques/the-30-css-selectors-you-must-memorize/
 http://net.tutsplus.com/tutorials/javascript-ajax/important-considerations-when-building-single-page-web-apps/
+http://stackoverflow.com/questions/10099059/what-are-the-key-differences-between-meteor-ember-js-and-backbone-js
+http://coding.smashingmagazine.com/2012/07/27/journey-through-the-javascript-mvc-jungle/
+http://todomvc.com/
+http://codebrief.com/2012/01/the-top-10-javascript-mvc-frameworks-reviewed/
