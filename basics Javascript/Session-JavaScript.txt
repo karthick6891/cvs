@@ -50,3 +50,5 @@ http://todomvc.com/
 http://codebrief.com/2012/01/the-top-10-javascript-mvc-frameworks-reviewed/
 http://web.mit.edu/6C3C3C6C-F0FD-4DB0-A74E-B98116A2DE86/FinalDownload/DownloadId-93B496327D1E48FA399C4C1A42C96BF6/6C3C3C6C-F0FD-4DB0-A74E-B98116A2DE86/itag/eag/FullEnterpriseArchitectureGuide0.1.pdf
 http://blogs.captechconsulting.com/blog/joshua-stickles/single-page-web-apps-using-backbonejs
+http://www.html5canvastutorials.com/three/html5-canvas-three-js-phong-material/
+http://duganchen.ca/single-page-web-app-architecture-done-right/
