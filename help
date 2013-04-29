@@ -1,0 +1,48 @@
+try this json array to java object
+
+private String jsonSource;
+  private boolean sourceFromFile;
+
+	public Utils(String jsonSource, boolean sourceFromFile) {
+		this.jsonSource = jsonSource;
+		this.sourceFromFile = sourceFromFile;
+	}
+
+	public static void main(String[] args){
+		Utils jsonParserDemo =
+				new Utils("d:\\temp.json", true);
+		
+		try{
+			JsonReader jsonReader = jsonParserDemo.getJsonReader();
+			 Gson myGson = new Gson();
+			JsonParser jsonParser = new JsonParser();
+			JsonArray userArray =  jsonParser.parse(jsonReader).getAsJsonArray();
+			List<Wine> twitterUsers = new ArrayList<Wine>();
+			for ( JsonElement aUser : userArray ){
+				Wine aTwitterUser = myGson.fromJson(aUser, Wine.class);
+				twitterUsers.add(aTwitterUser);
+			}
+			for ( Wine tUser : twitterUsers){
+				System.out.println(tUser.getId());
+			}
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * Obtain the JsonReader for the given source details.
+	 * 
+	 * @return the JsonReader instance
+	 * @throws FileNotFoundException
+	 */
+	private JsonReader getJsonReader() throws FileNotFoundException {
+		JsonReader reader = null;
+		if (sourceFromFile) {
+			reader = new JsonReader(new InputStreamReader(new FileInputStream(
+					this.jsonSource)));
+		}
+		return reader;
+	}
