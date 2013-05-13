@@ -40,7 +40,7 @@ public class LoginCommand implements Command{
 	        	e.printStackTrace();
 	        }
 	        if(userId.equalsIgnoreCase("abc") && password.equalsIgnoreCase("abc")){
-	              context.getRequestDispatcher("/home.html").forward(request, response);
+	              context.getRequestDispatcher("/home.jsp").forward(request, response);
 	        }else{
 	            context.getRequestDispatcher("/jsp/error.jsp").forward(request, response);
 	        }

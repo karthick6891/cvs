@@ -2,6 +2,12 @@
 * Homepage js
 **/
 
+_.templateSettings = {
+    interpolate: /\<\@\=(.+?)\@\>/gim,
+    evaluate: /\<\@([\s\S]+?)\@\>/gim,
+    escape: /\<\@\-(.+?)\@\>/gim
+};
+
 var events = [
         {eventName:"Edge conference in Berlin on 27th April,2013"},
         {eventName:"Adobe Max conference in Seattle on 30th April,2013"},
