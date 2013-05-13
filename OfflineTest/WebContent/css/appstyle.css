@@ -1,0 +1,11 @@
+body, div, h1, h2, h3, h4, h5, h6, p, ul, img {margin:0px; padding:0px; }
+
+.container {  
+    width: 800px;  
+    margin: 0 auto;   
+}
+
+
+#main {  
+    background: url(../img/site/site_header_background.jpg) repeat-x;   
+}
