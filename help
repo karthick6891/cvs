@@ -1,0 +1,87 @@
+try this json array to java object
+UL7FKA1iKAZ4uLb56fIJ9pIZ-3uJjN0vloRdHtlf2cOuu3lLJB21QNMDnwOytVzSAkwM91cTDQrRSCb1gx6yWc43dQ5vQ7Gt04mrjqHZ0ApgHO3ZBmJxP0NkSyS4AGR70Fpjv5DhYNkVoWxp6w7hQnOI8M35TkQJY0zMmcc9CaWcdhoq4M1N7B7pzfoeu16Tf_pL-JTpYlxtU8BXw5Ne6H6UriJPlQgTy5Mz.
+
+private String jsonSource;
+  private boolean sourceFromFile;
+
+	public Utils(String jsonSource, boolean sourceFromFile) {
+		this.jsonSource = jsonSource;
+		this.sourceFromFile = sourceFromFile;
+	}
+
+	public static void main(String[] args){
+		Utils jsonParserDemo =
+				new Utils("d:\\temp.json", true);
+		
+		try{
+			JsonReader jsonReader = jsonParserDemo.getJsonReader();
+			 Gson myGson = new Gson();
+			JsonParser jsonParser = new JsonParser();
+			JsonArray userArray =  jsonParser.parse(jsonReader).getAsJsonArray();
+			List<Wine> twitterUsers = new ArrayList<Wine>();
+			for ( JsonElement aUser : userArray ){
+				Wine aTwitterUser = myGson.fromJson(aUser, Wine.class);
+				twitterUsers.add(aTwitterUser);
+			}
+			for ( Wine tUser : twitterUsers){
+				System.out.println(tUser.getId());
+			}
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * Obtain the JsonReader for the given source details.
+	 * 
+	 * @return the JsonReader instance
+	 * @throws FileNotFoundException
+	 */
+	private JsonReader getJsonReader() throws FileNotFoundException {
+		JsonReader reader = null;
+		if (sourceFromFile) {
+			reader = new JsonReader(new InputStreamReader(new FileInputStream(
+					this.jsonSource)));
+		}
+		return reader;
+	}
+
+try this
+
+import javax.crypto.Cipher;
+import javax.crypto.SecretKey;
+import javax.crypto.SecretKeyFactory;
+import javax.crypto.spec.DESKeySpec;
+
+import org.apache.commons.codec.binary.Base64;
+
+public class CryptoUtils {
+  
+  public static final String AES = "AES";
+  
+ public static void main(String[] args) throws Exception{
+	
+	 DESKeySpec keySpec = new DESKeySpec("12345678".getBytes("UTF8"));
+	 SecretKeyFactory keyFactory = SecretKeyFactory.getInstance("DES");
+	 SecretKey key = keyFactory.generateSecret(keySpec);
+
+	// ENCODE plainTextPassword String
+	 byte[] cleartext = "Chennai#4".getBytes("UTF8");      
+
+	 Cipher cipher = Cipher.getInstance("DES"); // cipher is not thread safe
+	 cipher.init(Cipher.ENCRYPT_MODE, key);
+	 String encrypedPwd = Base64.encodeBase64String(cipher.doFinal(cleartext));
+	 System.out.println("encrypted" + encrypedPwd);
+	// DECODE encryptedPwd String
+	 byte[] encrypedPwdBytes = Base64.decodeBase64(encrypedPwd);
+
+	 Cipher cipher1 = Cipher.getInstance("DES");// cipher is not thread safe
+	 cipher1.init(Cipher.DECRYPT_MODE, key);
+	 byte[] plainTextPwdBytes = (cipher1.doFinal(encrypedPwdBytes));
+	 System.out.println(new String(plainTextPwdBytes, "UTF-8") + "\n");
+}
+ 
+ 
+}
