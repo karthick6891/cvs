@@ -6,7 +6,7 @@ import javax.servlet.ServletException;
 import java.io.IOException;
 
 /**
- * @author santhana_s01
+ * @author Santhana Rajagopalan S
  */
 public interface Command
 {

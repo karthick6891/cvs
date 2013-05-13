@@ -20,7 +20,7 @@ import org.apache.catalina.websocket.WsOutbound;
 
 /**
  * Servlet implementation class UpdateStatus
- * @author santhana_s01 
+ * @author Santhana Rajagopalan S 
  */
 
 @WebServlet( name="UpdateStatus", displayName="Update Status", urlPatterns = {"/UpdateStatus","*.*"}, loadOnStartup=1)

@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.cache.bean.ModelBean;
 /**
- * @author santhana_s01@infosys.com
+ * @author Santhana Rajagopalan S
  */
 
 public class InitCommand implements Command
