@@ -17,7 +17,10 @@
         <subView activeIndex="0" />
     </Session>
 </NotepadPlus>
-
+/*****************From home****************************************/
+http://alistapart.com/article/application-cache-is-a-douchebag
+http://edgeconf.com/
+http://blog.sethladd.com/2010/10/proposal-to-enhance-html5-app-cache.html
 *****************************************************************************************************************
 Links
 http://garmahis.com/tutorials/pixel-art-tutorials/
@@ -36,3 +39,19 @@ SO
     You're probably confused because you view multiple inheritance locally, in terms of one class inheriting implementation details from multiple parents. This is not possible in Java (and often leads to abuse in languages where it's possible).
     
     Interfaces allow multiple inheritance of types, e.g. a class Waterfowl extends Bird implements Swimmer can be used by other classes as if it were a Bird and as if it were a Swimmer. This is the the deeper meaning of multiple inheritance: allowing one object to act like it belongs to several unrelated different classes at once
+
+*****************************************************************************************************************
+29/4/2013
+http://net.tutsplus.com/tutorials/html-css-techniques/the-30-css-selectors-you-must-memorize/
+http://net.tutsplus.com/tutorials/javascript-ajax/important-considerations-when-building-single-page-web-apps/
+http://stackoverflow.com/questions/10099059/what-are-the-key-differences-between-meteor-ember-js-and-backbone-js
+http://coding.smashingmagazine.com/2012/07/27/journey-through-the-javascript-mvc-jungle/
+http://todomvc.com/
+http://codebrief.com/2012/01/the-top-10-javascript-mvc-frameworks-reviewed/
+http://web.mit.edu/6C3C3C6C-F0FD-4DB0-A74E-B98116A2DE86/FinalDownload/DownloadId-93B496327D1E48FA399C4C1A42C96BF6/6C3C3C6C-F0FD-4DB0-A74E-B98116A2DE86/itag/eag/FullEnterpriseArchitectureGuide0.1.pdf
+http://blogs.captechconsulting.com/blog/joshua-stickles/single-page-web-apps-using-backbonejs
+http://www.html5canvastutorials.com/three/html5-canvas-three-js-phong-material/
+http://duganchen.ca/single-page-web-app-architecture-done-right/
+http://www.bennadel.com/blog/1730-Building-Single-Page-Applications-Using-jQuery-And-ColdFusion-With-Ben-Nadel-Video-Presentation-.htm
+http://coenraets.org/blog/2012/05/single-page-crud-application-with-backbone-js-and-twitter-bootstrap/
+http://anandnalya.com/2012/03/19/building-a-single-page-webapp-with-jquery/
