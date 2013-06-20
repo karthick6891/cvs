@@ -1,0 +1,156 @@
+var clinkCode = {
+  '0':10,
+	'1':11,
+	'2':12,
+	'3':13,
+	'4':14,
+	'5':15,
+	'6':16,
+	'7':17,
+	'8':18,
+	'9':19,
+	'a': 20,
+	'b': 21,
+	'c': 22,
+	'd': 23,
+	'e': 24,
+	'f': 25,
+	'g': 26,
+	'h': 27,
+	'i': 28,
+	'j': 29,
+	'k': 30,
+	'l': 31,
+	'm': 32,
+	'n': 33,
+	'o': 34,
+	'p': 35,
+	'q': 36,
+	'r': 37,
+	's': 38,
+	't': 39,
+	'u': 40,
+	'v': 41,
+	'w': 42,
+	'x': 43,
+	'y': 44,
+	'z': 45,
+	'A': 60,
+	'B': 61,
+	'C': 62,
+	'D': 63,
+	'E': 64,
+	'F': 65,
+	'G': 66,
+	'H': 67,
+	'I': 68,
+	'J': 69,
+	'K': 70,
+	'L': 71,
+	'M': 72,
+	'N': 73,
+	'O': 74,
+	'P': 75,
+	'Q': 76,
+	'R': 77,
+	'S': 78,
+	'T': 79,
+	'U': 80,
+	'V': 81,
+	'W': 82,
+	'X': 83,
+	'Y': 84,
+	'Z': 85,
+	'+': 90,
+	'/':91	
+};
+var base64String ="iVBORw0KGgoAAAANSUhEUgAAABAAAAAQAQMAAAAlPW0iAAAABlBMVEUAAAD///+l2Z/dAAAAM0lEQVR4nGP4/5/h/1+G/58ZDrAz3D/McH8yw83NDDeNGe4Ug9C9zwz3gVLMDA/A6P9/AFGGFyjOXZtQAAAAAElFTkSuQmCC";
+
+console.log(base64String.length);
+
+var compBlock = {};
+
+function blockObject(id, header, data){
+	this.id = id;
+	this.header = header;
+	this.data = data;
+}
+
+
+
+function comp(){
+var charArray= [];
+var letArray = base64String.split("");
+var charString = ''
+
+console.log("original string length" + letArray.length);
+
+for (var i = 0; i < base64String.length; i ++){
+	charArray[i] =clinkCode[letArray[i]];
+	charString = charString + clinkCode[letArray[i]];
+}
+
+console.log("clink string length" , charString);
+
+
+ var header = charString.substring(charString.length/2, charString.length);
+ var data = Number(charString.substring(0, charString.length/2))/ Number(charString.substring(charString.length/2, charString.length));
+ data = parseFloat(data).toFixed(6);
+ 
+ 
+console.log("done");
+
+var buffer = {
+	fast: 256,
+	normal: 256,
+	best: 512
+};
+
+var numOfBlocks = charString.length/buffer.fast;
+console.log("Number of blocks" + numOfBlocks);
+
+var unCompBlock = [];
+for (var i = 0; i < parseInt(numOfBlocks); i++){
+
+unCompBlock[i] = charString.substring(i*buffer.fast , buffer.fast * (i + 1));
+console.log(unCompBlock[i].length + " :: "+ i );
+}
+
+if(numOfBlocks.toString().indexOf('.') != -1){
+unCompBlock[parseInt(numOfBlocks)] = charString.substring(buffer.fast * parseInt(numOfBlocks)  , charString.length);
+}
+/*var uncompressBlock = charString.substring(0,8192);
+var uncompressBlock1 = charString.substring(8192,8192 * 2);
+var uncompressBlock2 = charString.substring(8192 * 2,8192 * 3);
+var uncompressBlock3 = charString.substring(8192 * 3,8192 * 4);
+var uncompressBlock4 = charString.substring(8192 * 4,8192 * 5);
+var uncompressBlock5 = charString.substring(8192 * 5,charString.length);
+console.log("String length " +uncompressBlock.length )
+console.log("String length " +uncompressBlock1.length )
+console.log("String length " +uncompressBlock2.length )
+console.log("String length " +uncompressBlock3.length )
+console.log("String length " +uncompressBlock4.length )
+console.log("String length " +uncompressBlock5.length )
+console.log("String length " +charString.length )*/
+
+
+
+var temp = '';
+for (var i = 0; i < unCompBlock.length; i++){ 
+	  var obj = processBlock(unCompBlock[i]);
+	 compBlock[i] = new blockObject(i, obj.header, obj.data);
+}
+console.log("done1");
+}
+
+
+function processBlock(block){
+console.log("blocklength" + block.length);
+ var header = block.substring(block.length/2, block.length);
+ var data = Number(block.substring(0, block.length/2))/ Number(block.substring(block.length/2, block.length));
+ data = parseFloat(data).toFixed(6);
+ var obj = {header: header, data: data};
+ console.log(obj);
+ return obj;
+}
+comp();
