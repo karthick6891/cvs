@@ -18,6 +18,9 @@ str.replace(/\bft2\b/g,"ft<sup>2</sup>");
 To replace both ft2 and m2 to superscript
 str = str.replace(/(ft|m)2/g,"$1<sup>2</sup>");
 
+replace backslash (url) with forward slash
+x.replace(/\//g,'\\','m');
+
 /**********************************************/
 var str= "This shirt, is very nice. It costs DKK 1.500,00";
 var pattern =/(\d+\.\d+)+,\d+/g;
